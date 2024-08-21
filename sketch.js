@@ -252,7 +252,7 @@ function drawCircles() {
                 noStroke();
                 
                 // Calcula las coordenadas y tamaño del rectángulo negro
-                let rectSize = circleSize+2; // Tamaño del rectángulo igual al tamaño del círculo exterior
+                let rectSize = circleSize+4; // Tamaño del rectángulo igual al tamaño del círculo exterior
                 let rectX = x - rectSize / 2; // Coordenada x del rectángulo
                 let rectY = y - rectSize / 2; // Coordenada y del rectángulo
 
