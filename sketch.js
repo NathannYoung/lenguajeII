@@ -123,19 +123,24 @@ function setupElipsis() {
     canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('sketch-holder');
  
-
     // Inicializa el tamaño de crecimiento con el tamaño de los círculos en Repetición
     growingSize = circleSize;
     blinkState = false;
     if (!blinkInterval) {
         blinkInterval = setInterval(toggleBlink, 500); // Configura el parpadeo
     }
-    isRepeticion = true; // Activa la pantalla de Elipsis
+    isRepeticion = false; // Asegúrate de que la pantalla de Repetición esté desactivada
     isHiperbole = false; // Asegúrate de que la pantalla de Hipérbole esté desactivada
     isAcumulacion = false; // Asegúrate de que la pantalla de Acumulación esté desactivada
     isElipsis = true; // Activa la pantalla de Elipsis
     isMetafora = false; // Bandera para saber si estamos en la pantalla de Metáfora
     isMetonimia = false; 
+
+    // Establece una posición aleatoria para el círculo parpadeante
+    let randomCol = int(random(cols));
+    let randomRow = int(random(rows));
+    blinkCircleIndex = randomRow * cols + randomCol;
+
     loop(); // Asegúrate de que el bucle de dibujo esté activo
 }
 
@@ -226,6 +231,9 @@ function drawCircles() {
             let index = row * cols + col;
             let x = startX + col * (circleSize + margin) + circleSize / 2;
             let y = startY + row * (circleSize + margin) + circleSize / 2;
+
+            // Omitir el dibujo del círculo con una probabilidad aleatoria (por ejemplo, 30%)
+            if (random() < 0.3) continue;
 
             // Dibuja el círculo exterior
             fill(255);
