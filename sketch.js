@@ -231,9 +231,6 @@ function drawCircles() {
             let x = startX + col * (circleSize + margin) + circleSize / 2;
             let y = startY + row * (circleSize + margin) + circleSize / 2;
 
-            // Omitir el dibujo del círculo con una probabilidad aleatoria (por ejemplo, 30%)
-            if (random() < 0.3) continue;
-
             // Dibuja el círculo exterior
             fill(255);
             stroke(0);
@@ -251,7 +248,7 @@ function drawCircles() {
                 noStroke();
                 
                 // Calcula las coordenadas y tamaño del rectángulo negro
-                let rectSize = circleSize+4; // Tamaño del rectángulo igual al tamaño del círculo exterior
+                let rectSize = circleSize+2; // Tamaño del rectángulo igual al tamaño del círculo exterior
                 let rectX = x - rectSize / 2; // Coordenada x del rectángulo
                 let rectY = y - rectSize / 2; // Coordenada y del rectángulo
 
