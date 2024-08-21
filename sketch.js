@@ -34,28 +34,6 @@ let splitOffset = 0;
 let splitComplete = false;
 
 
-function setupRepeticion() {
-    if (canvas) {
-        canvas.remove();
-    }
-    canvas = createCanvas(windowWidth, windowHeight);
-    canvas.parent('sketch-holder');
-  
-    growingSize = circleSize; // Inicializa el tamaño de crecimiento con el tamaño de los círculos en Repetición
-    blinkState = false;
-    if (!blinkInterval) {
-        blinkInterval = setInterval(toggleBlink, 500); // Configura el parpadeo
-    }
-    isRepeticion = true; // Establece la bandera a true para la pantalla de Repetición
-    isHiperbole = false; // Asegúrate de que la pantalla de Hipérbole esté desactivada
-    isAcumulacion = false; // Asegúrate de que la pantalla de Acumulación esté desactivada
-    isElipsis = false; // Asegúrate de que la pantalla de Elipsis esté desactivada
-    isMetafora = false; // Bandera para saber si estamos en la pantalla de Metáfora
-    isMetonimia = false; 
-
-    loop(); // Asegúrate de que el bucle de dibujo esté activo
-}
-
 function setupHiperbole() {
     if (canvas) {
         canvas.remove();
@@ -116,6 +94,29 @@ function setupAcumulacion() {
     loop(); // Asegúrate de que el bucle de dibujo esté activo
 }
 
+function setupRepeticion() {
+    if (canvas) {
+        canvas.remove();
+    }
+    canvas = createCanvas(windowWidth, windowHeight);
+    canvas.parent('sketch-holder');
+  
+    growingSize = circleSize; // Inicializa el tamaño de crecimiento con el tamaño de los círculos en Repetición
+    blinkState = false;
+    blinkCircleIndex = getRandomCircleIndex(); // Asigna un índice aleatorio al círculo que parpadea
+    if (!blinkInterval) {
+        blinkInterval = setInterval(toggleBlink, 500); // Configura el parpadeo
+    }
+    isRepeticion = true; // Establece la bandera a true para la pantalla de Repetición
+    isHiperbole = false; // Asegúrate de que la pantalla de Hipérbole esté desactivada
+    isAcumulacion = false; // Asegúrate de que la pantalla de Acumulación esté desactivada
+    isElipsis = false; // Asegúrate de que la pantalla de Elipsis esté desactivada
+    isMetafora = false; // Bandera para saber si estamos en la pantalla de Metáfora
+    isMetonimia = false; 
+
+    loop(); // Asegúrate de que el bucle de dibujo esté activo
+}
+
 function setupElipsis() {
     if (canvas) {
         canvas.remove();
@@ -123,27 +124,25 @@ function setupElipsis() {
     canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('sketch-holder');
  
-    // Inicializa el tamaño de crecimiento con el tamaño de los círculos en Repetición
     growingSize = circleSize;
     blinkState = false;
+    blinkCircleIndex = getRandomCircleIndex(); // Asigna un índice aleatorio al círculo que parpadea
     if (!blinkInterval) {
         blinkInterval = setInterval(toggleBlink, 500); // Configura el parpadeo
     }
-    isRepeticion = false; // Asegúrate de que la pantalla de Repetición esté desactivada
+    isRepeticion = true; // Activa la pantalla de Elipsis
     isHiperbole = false; // Asegúrate de que la pantalla de Hipérbole esté desactivada
     isAcumulacion = false; // Asegúrate de que la pantalla de Acumulación esté desactivada
     isElipsis = true; // Activa la pantalla de Elipsis
     isMetafora = false; // Bandera para saber si estamos en la pantalla de Metáfora
     isMetonimia = false; 
-
-    // Establece una posición aleatoria para el círculo parpadeante
-    let randomCol = int(random(cols));
-    let randomRow = int(random(rows));
-    blinkCircleIndex = randomRow * cols + randomCol;
-
     loop(); // Asegúrate de que el bucle de dibujo esté activo
 }
 
+// Función que genera un índice aleatorio para el círculo que parpadea
+function getRandomCircleIndex() {
+    return Math.floor(Math.random() * cols * rows);
+}
 function setupMetafora() {
     if (canvas) {
         canvas.remove();
